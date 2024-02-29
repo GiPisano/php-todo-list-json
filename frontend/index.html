@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,27 @@
 <body>
     <div id="app">
         <h1 class="text-center">{{ title }}</h1>
+
+        <div class="container">
+
+            <div class="input-group mb-3">
+                <input type="text" v-model="newItem" @keyUp.enter="addNewToDo()" class="form-control"
+                    placeholder="Aggiungi un nuovo todo" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" @click="addNewToDo()" type="button"
+                    id="button-addon2">Aggiungi</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    ToDo
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" v-for="item in toDoList">{{ item }}</li>
+                </ul>
+            </div>
+
+        </div>
     </div>
 
     <!-- js Bootstrap -->
