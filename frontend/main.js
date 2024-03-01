@@ -12,7 +12,7 @@ const app = createApp({
 
     methods:{
         fetchToDoList(){
-            axios.get('http://localhost:8888/php-todo-list-json/backend/api/get-list.php').then((responde) => {
+            axios.get('../backend/api/get-list.php').then((responde) => {
             this.toDoList = responde.data
             });
         },
@@ -28,7 +28,8 @@ const app = createApp({
                 headers: { 'Content-Type': 'multipart/form-data' },
             };
 
-            axios.post('http://localhost:8888/php-todo-list-json/backend/api/store-item.php', data, params)
+            // todo: modificare url in path
+            axios.post('../backend/api/store-item.php', data, params)
             .then((response) => {
                 this.toDoList = response.data
             });
