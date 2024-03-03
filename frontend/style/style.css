@@ -8,4 +8,6 @@
 
 .task{
     cursor: pointer;
+    display: flex;
+    flex-grow: 1;
 }
