@@ -15,13 +15,15 @@ const app = createApp({
     },
 
     methods:{
+
         fetchToDoList(){
             axios.get('../backend/api/get-list.php').then((responde) => {
             this.toDoList = responde.data;
             });
         },
 
-        addNewToDo(){
+        // funzione per aggiungere una task
+        addNewTask(){
 
             const data = { 
                 text: this.newTask.text,
@@ -39,6 +41,7 @@ const app = createApp({
             });
         },
 
+        // funzione che modifica lo stato da true a false 
         taskDone(task, index) {
             const newStatus = !task.done;
     
@@ -58,6 +61,7 @@ const app = createApp({
                 })
         },
 
+        // funzione che elimina la task
         deleteTask(index){
     
             const data = { 
