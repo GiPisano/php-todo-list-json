@@ -6,34 +6,74 @@ const app = createApp({
             title: 'ToDo List',
             toDoList: [],
 
-            newItem: '',
+            newTask: 
+                {
+                    text: '',
+                    done: false,
+                },
         }
     },
 
     methods:{
         fetchToDoList(){
             axios.get('../backend/api/get-list.php').then((responde) => {
-            this.toDoList = responde.data
+            this.toDoList = responde.data;
             });
         },
 
         addNewToDo(){
-            const item = this.newItem;
-            console.log('da aggiunger' + item);
-            this.newItem = '';
 
-            const data = { item };
+            const data = { 
+                text: this.newTask.text,
+                done: false,
+             };
 
             const params = {
                 headers: { 'Content-Type': 'multipart/form-data' },
             };
 
-            // todo: modificare url in path
             axios.post('../backend/api/store-item.php', data, params)
             .then((response) => {
-                this.toDoList = response.data
+                this.toDoList = response.data;
+                this.newTask.text = '';
             });
         },
+
+        taskDone(task, index) {
+            const newStatus = !task.done;
+    
+            const data = { 
+                index,
+                text: task.text,
+                done: newStatus,
+            };
+    
+            const params = {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            };
+    
+            axios.post('../backend/api/update-task.php', data, params)
+                .then((response) => {
+                    this.toDoList = response.data;
+                })
+        },
+
+        deleteTask(index){
+    
+            const data = { 
+                index,
+            };
+
+            const params = {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            };
+    
+            axios.post('../backend/api/delete-task.php', data, params)
+                .then((response) => {
+                    this.toDoList = response.data;
+                })
+        }
+      
     },
 
     mounted(){

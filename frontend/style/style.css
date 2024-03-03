@@ -1,0 +1,11 @@
+.card{
+    min-width: 18rem;
+}
+
+.task-done{
+    text-decoration: line-through;
+}
+
+.task{
+    cursor: pointer;
+}
